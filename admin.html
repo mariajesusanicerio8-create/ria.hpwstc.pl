@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IONTECH Admin</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="./" style="text-decoration:none">
+      <div class="logo-box" data-logo><span>YOUR<br>LOGO</span></div>
+      <div><h1 data-brand>IONTECH</h1><p>Catalog Admin</p></div>
+    </a>
+    <div class="nav-links"><a href="./">View catalog</a><button id="logout">Log out</button></div>
+  </div>
+</header>
+
+<main class="container admin-wrap">
+  <section id="loginPanel" class="admin-card">
+    <h2>Admin access</h2>
+    <p class="notice"><strong>Important:</strong> This GitHub Pages version is a static demo. The password is visible in the site code, so it is <strong>not suitable for real security</strong>. For production, connect this UI to a real authentication/backend service.</p>
+    <form id="loginForm" style="max-width:520px">
+      <div class="field"><label for="adminPassword">Admin password</label><input id="adminPassword" type="password" autocomplete="current-password" required></div>
+      <button class="btn btn-primary" style="margin-top:12px">Sign in</button>
+      <p id="loginError" class="small" style="color:#b33a3a"></p>
+    </form>
+  </section>
+
+  <section id="adminPanel" class="hidden">
+    <div class="admin-card">
+      <h2>Company & SEO settings</h2>
+      <div class="admin-grid">
+        <div class="field"><label>Company name</label><input id="companyName"></div>
+        <div class="field"><label>Browser/site title</label><input id="siteTitle"></div>
+        <div class="field" style="grid-column:1/-1"><label>Site SEO description</label><textarea id="siteDescription"></textarea></div>
+        <div class="field">
+          <label>Company logo</label>
+          <input id="logoFile" type="file" accept="image/*">
+          <div id="logoPreview" class="image-slot" style="margin-top:8px"><div class="placeholder">No logo uploaded</div></div>
+        </div>
+      </div>
+      <button id="saveSettings" class="btn btn-primary" style="margin-top:14px">Save site settings</button>
+      <span id="settingsStatus" class="small"></span>
+    </div>
+
+    <div class="admin-card">
+      <h2>Product manager</h2>
+      <p class="small">Every product has two image slots. Uploading an image stores it in this browser's local storage. To make images permanently public for everyone, commit image files to the GitHub repository or connect a backend such as Supabase.</p>
+      <input id="productSearch" class="input" placeholder="Search products to edit...">
+      <p id="adminCount" class="small"></p>
+      <div id="adminRows" class="admin-list"></div>
+    </div>
+
+    <section id="editPanel" class="admin-card hidden">
+      <h2>Edit product</h2>
+      <div class="admin-grid">
+        <div class="field"><label>SKU</label><input id="editSku" readonly></div>
+        <div class="field"><label>Model</label><input id="editModel"></div>
+        <div class="field" style="grid-column:1/-1"><label>Description</label><textarea id="editDescription"></textarea></div>
+        <div class="field"><label>On-hand / DP price</label><input id="editOnhand"></div>
+        <div class="field"><label>Order-basis / SRP price</label><input id="editOrder"></div>
+        <div class="field"><label>Open quantity</label><input id="editQty"></div>
+      </div>
+      <h3>Product images</h3>
+      <div class="image-admin">
+        <div class="image-slot">
+          <strong>Image 1</strong>
+          <div id="preview1" style="margin-top:8px"></div>
+          <input id="editImage1" type="file" accept="image/*" style="margin-top:8px">
+        </div>
+        <div class="image-slot">
+          <strong>Image 2</strong>
+          <div id="preview2" style="margin-top:8px"></div>
+          <input id="editImage2" type="file" accept="image/*" style="margin-top:8px">
+        </div>
+      </div>
+      <button id="saveProduct" class="btn btn-primary" style="margin-top:14px">Save product</button>
+      <button id="cancelEdit" class="btn btn-secondary" style="margin-top:14px">Cancel</button>
+      <span id="saveStatus" class="small"></span>
+    </section>
+
+    <div class="admin-card">
+      <h2>Backup / restore</h2>
+      <p class="small">Use these tools to move your local admin edits between browsers or keep a backup. This does not publish files to GitHub automatically.</p>
+      <button id="exportData" class="btn btn-secondary">Export admin backup</button>
+      <label class="btn btn-secondary" style="display:inline-block">Import backup <input id="importData" type="file" accept=".json" hidden></label>
+    </div>
+  </section>
+</main>
+
+<script src="data/products.js"></script>
+<script src="assets/app.js"></script>
+<script src="assets/admin.js"></script>
+</body>
+</html>
